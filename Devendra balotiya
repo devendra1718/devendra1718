@@ -1,0 +1,30 @@
+import urllib.request
+from tkinter import *
+import tkinter as tk
+window=Tk()
+
+
+window.geometry("700x350")
+window.title("python project")
+head=Label(window, text="Website Connectivity Checker", font=('Calibri 15'))
+head.pack(pady=20)
+
+def check():
+    web= (url.get())
+    if(web==""):
+        tk.messagebox.showwarning("WARNING", "PLEASE ENTER URL..!")
+    else:
+        try:
+            status_code = urllib.request.urlopen(web).getcode()
+            website_is_up = status_code == 200
+            if website_is_up==TRUE:
+                Label(window, text="\tWebsite Available", font=('Calibri 15')).place(x=260,y=200)
+            else:
+                Label(window, text="Website Not Available", font=('Calibri 15')).place(x=260,y=200)
+        except:
+             Label(window, text="Website Not Give Access", font=('Calibri 15')).place(x=260,y=200)
+
+url=tk.StringVar()
+Entry(window, textvariable=url).place(x=200,y=80,height=30,width=280)
+Button(window, text="Check",command=check).place(x=320,y=160)
+window.mainloop()
